@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import { graphql, gql } from 'react-apollo';
 import styles from './styles.scss';
 
+import Slider from 'components/commons/slider';
+
 class Home extends Component {
   render() {
-    console.log('====================================');
-    console.log(this.props, styles);
-    console.log('====================================');
-    return <div className={styles.home2}>Home</div>;
+    return (
+      <div className={styles.home}>
+        <Slider />
+      </div>
+    );
   }
 }
 

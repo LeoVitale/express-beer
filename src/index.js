@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import createHistory from 'history/createBrowserHistory';
 import AppContainer from 'react-hot-loader/lib/AppContainer';
+import WebFont from 'webfontloader';
 // apollo imports
 import {
   ApolloProvider,
@@ -13,7 +14,13 @@ import {
 } from 'react-apollo';
 
 import configureStore from './configureStore';
-import App from './containers/App';
+import App from 'containers/App';
+
+WebFont.load({
+  google: {
+    families: ['Open Sans:300,400,600,700']
+  }
+});
 
 const networkInterface = createNetworkInterface({
   uri:
@@ -44,8 +51,8 @@ const render = App => {
 render(App);
 
 if (module.hot && process.env.NODE_ENV === 'development') {
-  module.hot.accept('./containers/App', () => {
-    const App = require('./containers/App').default;
+  module.hot.accept('containers/App', () => {
+    const App = require('containers/App').default;
     render(App);
   });
 }

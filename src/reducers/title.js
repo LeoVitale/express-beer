@@ -1,9 +1,9 @@
-export default (state = 'RFR Demo', action = {}) => {
+export default (state = 'Express Beer', action = {}) => {
   switch (action.type) {
     case 'HOME':
-      return 'RFR Boilerplate';
+      return 'Express Beer - Home';
     case 'Products':
-      return `RFR: ${capitalize(action.payload.category)}`;
+      return 'Express Beer - Produtos';
     default:
       return state;
   }

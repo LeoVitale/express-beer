@@ -67,10 +67,31 @@ module.exports = {
             }
           ]
         })
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
+        use: ['file-loader']
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192
+            }
+          }
+        ]
       }
     ]
   },
   resolve: {
+    alias: {
+      components: path.resolve(__dirname, '../src/components/'),
+      containers: path.resolve(__dirname, '../src/containers/'),
+      images: path.resolve(__dirname, '../src/img/')
+    },
+    modules: [path.resolve('./src/'), 'node_modules'],
     extensions: ['.js', '.css', '.scss']
   },
   plugins: [

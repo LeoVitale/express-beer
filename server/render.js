@@ -39,7 +39,7 @@ export default ({ clientStats }) => async (req, res, next) => {
       <html>
         <head>
           <meta charset="utf-8">
-          <title>redux-first-router-boilerplate</title>
+          <title>Express Beer</title>
           ${styles}
         </head>
         <body>
