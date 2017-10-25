@@ -1,0 +1,27 @@
+$sm-viewport: 48em;
+$md-viewport: 64em;
+$lg-viewport: 75em;
+
+
+@mixin screen-tablet {
+  @media only screen and (min-width: $sm-viewport) {
+    @content;
+  }
+}
+
+@mixin screen-desktop {
+  @media only screen and (min-width: $md-viewport) {
+    @content;
+  }
+}
+
+@mixin screen-large {
+  @media only screen and (min-width: $lg-viewport) {
+    @content;
+  }
+}
+
+@mixin iconFont ($font-name) {
+  font-family: 'NestReadyIcons';
+  content: $font-name;
+}

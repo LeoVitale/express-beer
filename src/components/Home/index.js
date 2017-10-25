@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { graphql, gql } from 'react-apollo';
+import styles from './styles.scss';
 
 class Home extends Component {
   render() {
     console.log('====================================');
-    console.log(this.props);
+    console.log(this.props, styles);
     console.log('====================================');
-    return <div>Home</div>;
+    return <div className={styles.home2}>Home</div>;
   }
 }
 

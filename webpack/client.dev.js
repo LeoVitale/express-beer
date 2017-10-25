@@ -29,21 +29,39 @@ module.exports = {
         use: 'babel-loader'
       },
       {
-        test: /\.css$/,
+        test: /\.global\.scss$/,
+        loaders: ['style-loader', 'css-loader', 'sass-loader'],
+        include: path.resolve(__dirname, '../')
+      },
+      {
+        test: /^(?!.*?\.global).*\.(css|scss)$/,
         use: ExtractCssChunks.extract({
-          use: {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              localIdentName: '[name]__[local]--[hash:base64:5]'
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                sourceMap: true,
+                importLoaders: 1,
+                camelCase: 'dashes',
+                localIdentName: '[name]__[local]--[hash:base64:5]'
+              }
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                sourceMap: true,
+                data: "@import 'resources';",
+                includePaths: [path.join(__dirname, '../src/sass/resources/')]
+              }
             }
-          }
+          ]
         })
       }
     ]
   },
   resolve: {
-    extensions: ['.js', '.css']
+    extensions: ['.js', '.css', '.scss']
   },
   plugins: [
     new WriteFilePlugin(), // used so you can see what chunks are produced in dev
