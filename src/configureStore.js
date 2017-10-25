@@ -5,23 +5,44 @@ import { connectRoutes } from 'redux-first-router';
 import routesMap from './routesMap';
 import * as reducers from './reducers';
 
-export default (history, preloadedState) => {
+export default (history, preloadedState, client) => {
   const {
     reducer, middleware, enhancer, thunk
   } = connectRoutes(
     history,
     routesMap
   );
+  let rootReducer;
+  let middlewares;
 
-  const rootReducer = combineReducers({ ...reducers, location: reducer });
-  const middlewares = applyMiddleware(middleware);
+  if (client) {
+    rootReducer = combineReducers({
+      ...reducers,
+      apollo: client.reducer(),
+      location: reducer
+    });
+    middlewares = applyMiddleware(middleware, client.middleware());
+  } else {
+    rootReducer = combineReducers({ ...reducers, location: reducer });
+    middlewares = applyMiddleware(middleware);
+  }
+
   const enhancers = composeEnhancers(enhancer, middlewares);
   const store = createStore(rootReducer, preloadedState, enhancers);
 
   if (module.hot && process.env.NODE_ENV === 'development') {
     module.hot.accept('./reducers/index', () => {
       const reducers = require('./reducers/index');
-      const rootReducer = combineReducers({ ...reducers, location: reducer });
+      let rootReducer;
+      if (client) {
+        rootReducer = combineReducers({
+          ...reducers,
+          apollo: client.reducer(),
+          location: reducer
+        });
+      } else {
+        rootReducer = combineReducers({ ...reducers, location: reducer });
+      }
       store.replaceReducer(rootReducer);
     });
   }

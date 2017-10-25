@@ -20,10 +20,14 @@
     "format": "prettier --single-quote --semi=false --write '{src,server,webpack}/**/*.js' && npm run lint"
   },
   "dependencies": {
+    "apollo-client": "^1.9.3",
     "babel-polyfill": "^6.23.0",
     "express": "^4.15.2",
+    "graphql": "^0.11.7",
+    "graphql-tag": "^2.5.0",
     "history": "^4.6.3",
     "react": "^16.0.0",
+    "react-apollo": "^1.4.16",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.5",
     "react-universal-component": "^2.5.0",

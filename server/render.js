@@ -3,8 +3,24 @@ import ReactDOM from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { flushChunkNames } from 'react-universal-component/server';
 import flushChunks from 'webpack-flush-chunks';
+// apollo imports
+import {
+  ApolloProvider,
+  createNetworkInterface,
+  ApolloClient
+} from 'react-apollo';
+
 import configureStore from './configureStore';
 import App from '../src/components/App';
+
+const networkInterface = createNetworkInterface({
+  uri:
+    'https://803votn6w7.execute-api.us-west-2.amazonaws.com/dev/public/graphql'
+});
+
+const client = new ApolloClient({
+  networkInterface
+});
 
 export default ({ clientStats }) => async (req, res, next) => {
   const store = await configureStore(req, res);
@@ -37,7 +53,7 @@ export default ({ clientStats }) => async (req, res, next) => {
 };
 
 const createApp = (App, store) => (
-  <Provider store={store}>
+  <ApolloProvider client={client} store={store}>
     <App />
-  </Provider>
+  </ApolloProvider>
 );
