@@ -11,7 +11,7 @@ import {
 } from 'react-apollo';
 
 import configureStore from './configureStore';
-import App from '../src/components/App';
+import App from '../src/containers/App';
 
 const networkInterface = createNetworkInterface({
   uri:

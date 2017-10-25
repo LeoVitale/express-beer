@@ -12,8 +12,8 @@ import {
   ApolloClient
 } from 'react-apollo';
 
-import App from './components/App';
 import configureStore from './configureStore';
+import App from './containers/App';
 
 const networkInterface = createNetworkInterface({
   uri:
@@ -44,8 +44,8 @@ const render = App => {
 render(App);
 
 if (module.hot && process.env.NODE_ENV === 'development') {
-  module.hot.accept('./components/App', () => {
-    const App = require('./components/App').default;
+  module.hot.accept('./containers/App', () => {
+    const App = require('./containers/App').default;
     render(App);
   });
 }
