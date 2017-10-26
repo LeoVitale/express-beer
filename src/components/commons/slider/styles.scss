@@ -1,5 +1,13 @@
 .slider {
+  position: absolute;
+  background: url('../../../img/slider/hands-beer.jpg') no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  top: 0;
   .banner {
     width: 100%;
+    height: auto;
   }
 }

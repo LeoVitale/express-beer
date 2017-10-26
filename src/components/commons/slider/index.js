@@ -1,11 +1,7 @@
 import React from 'react';
-import BannerImage from 'images/slider/photo-friends-making-barbecue.jpg';
+import BannerImage from 'images/slider/hands-beer.jpg';
 import styles from './styles.scss';
 
-const Slider = () => (
-  <div className={styles.slider}>
-    <img className={styles.banner} src={BannerImage} alt="banner" />
-  </div>
-);
+const Slider = () => <div className={styles.slider} />;
 
 export default Slider;
