@@ -21,7 +21,6 @@ class Maps extends Component {
   }
 
   static defaultProps = {
-    center: { lat: -23.551449, lng: -46.6565569 },
     zoom: 18
   }
 
@@ -39,7 +38,7 @@ class Maps extends Component {
     styles: [
       {
         stylers: [
-          { saturation: 0 },
+          { saturation: -100 },
           { gamma: 0.8 },
           { lightness: 4 },
           { visibility: 'on' }
@@ -60,7 +59,7 @@ class Maps extends Component {
             libraries: 'geometry,drawing,places'
           }}
           onGoogleApiLoaded={this.onGoogleApiLoaded}
-          defaultCenter={{ lat: -23.551449, lng: -46.6565569 }}
+          defaultCenter={{ lat, lng }}
           center={{ lat, lng }}
           zoom={this.props.zoom}
           options={this.createMapOptions}

@@ -1,3 +1,53 @@
 .auto-complete {
   width: 100%;
+  display: flex;
+  .continue-button {
+    cursor: pointer;
+    margin-left: 10px;
+    display: block;
+    background-color: #FBDA0D;
+    border-radius: 2px;
+    border: none;
+    padding: 3px 1rem;
+    width: auto;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+    outline: none;
+  }
+}
+
+//VENDOR: AUTOCOMPLETE COMPONENT STYLES
+.root {
+  position: relative;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+.search-input,
+.search-input:focus,
+.search-input:active {
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+  border: honeydew;
+  display: block;
+  width: 100%;
+  padding: 16px;
+  font-size: 16px;
+  border-radius: 2px;
+  outline: none;
+}
+.auto-complete-container {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  border-bottom: honeydew;
+  border-left: honeydew;
+  border-right: honeydew;
+  border-top: 1px solid #e6e6e6;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  border-radius: 0 0 2px 2px;
+  font-size: .8rem;
+}
+
+.google-logo-image {
+  display: none;
 }

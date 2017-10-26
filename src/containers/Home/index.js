@@ -4,7 +4,7 @@ import styles from './styles.scss';
 
 import Slider from 'components/commons/slider';
 import Maps from 'components/commons/maps';
-import AutoComplete from 'components/commons/autoCOmplete';
+import AutoComplete from 'components/commons/autoComplete';
 
 class Home extends Component {
   state = {

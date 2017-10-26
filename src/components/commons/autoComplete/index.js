@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Link from 'redux-first-router-link';
 import styles from './styles.scss';
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -15,6 +16,8 @@ class AutoComplete extends Component {
   }
 
   onChange = address => this.setState({ address })
+
+  onFocus = () => console.log('focus')
 
   handleSelect = address => {
     this.setState({
@@ -43,16 +46,33 @@ class AutoComplete extends Component {
     const { loading } = this.state;
     const inputProps = {
       value: this.state.address,
-      onChange: this.onChange
+      autoFocus: true,
+      placeholder: 'Endereço de entrega',
+      onChange: this.onChange,
+      onFocus: this.onFocus
     };
 
     return (
-      <form className={styles.autoComplete}>
+      <div className={styles.autoComplete}>
         <PlacesAutocomplete
           onSelect={this.handleSelect}
           inputProps={inputProps}
+          classNames={{
+            root: styles.root,
+            input: styles.searchInput,
+            autocompleteContainer: styles.autoCompleteContainer,
+            googleLogoImage: styles.googleLogoImage
+          }}
         />
-      </form>
+        <Link
+          tagName="button"
+          className={styles.continueButton}
+          href="/products"
+          to="/products"
+        >
+          Continuar
+        </Link>
+      </div>
     );
   }
 }
