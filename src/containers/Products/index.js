@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { graphql, gql, compose } from 'react-apollo';
 import { Grid, Col, Row } from 'react-flexbox-grid';
+import { updateTotalPrice } from 'reducers/products';
 
 import styles from './styles.scss';
 
@@ -9,6 +10,20 @@ import Product from './product';
 import Filter from './filter';
 
 class Products extends Component {
+  state = {
+    price: 0
+  }
+
+  increasePrice = value => {
+    const { updateTotalPrice, price } = this.props;
+    this.setState({ price: this.state.price + value });
+  }
+
+  decreasePrice = value => {
+    const { updateTotalPrice, price } = this.props;
+    this.setState({ price: this.state.price - value });
+  }
+
   filterByCategory = id => {
     const { data, pocId } = this.props;
     data.refetch({
@@ -22,7 +37,12 @@ class Products extends Component {
     if (data.poc) {
       return data.poc.products.map(product => (
         <Col xs={12} sm={4} md={3} className={styles.gutterHeight}>
-          <Product key={product.id} productData={product.productVariants[0]} />
+          <Product
+            key={product.id}
+            productData={product.productVariants[0]}
+            increasePrice={this.increasePrice}
+            decreasePrice={this.decreasePrice}
+          />
         </Col>
       ));
     }
@@ -30,7 +50,8 @@ class Products extends Component {
   }
 
   render() {
-    const { data } = this.props;
+    const { data, price } = this.props;
+
     return (
       <div className={styles.products}>
         <Grid className={styles.productsList}>
@@ -40,6 +61,11 @@ class Products extends Component {
           />
           <Row>{this.listOfProducts(data)}</Row>
         </Grid>
+        <div className={styles.totalPrice}>
+          <span className={styles.totalLabel}>
+            R$ {parseFloat(this.state.price).toFixed(2)}
+          </span>
+        </div>
       </div>
     );
   }
@@ -74,8 +100,15 @@ const ProductsGraphQL = graphql(queryAllProducts, {
   })
 })(Products);
 
-const mapStateToProps = state => ({
-  pocId: state.products.pocId
+const mapDispatchToProps = dispatch => ({
+  updateTotalPrice: price => {
+    dispatch(updateTotalPrice(price));
+  }
 });
 
-export default connect(mapStateToProps)(ProductsGraphQL);
+const mapStateToProps = state => ({
+  pocId: state.products.pocId,
+  price: state.products.price
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsGraphQL);

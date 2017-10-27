@@ -1,8 +1,11 @@
 const UPDATE_POC_ID = 'expressbeer/products/UPDATE_POC_ID';
+const UPDATE_TOTAL_PRICE = 'expressbeer/products/UPDATE_TOTAL_PRICE';
 
 const initialState = {
-  pocId: '0'
+  pocId: '0',
+  price: 0
 };
+
 export default function reducer(
   state = { ...initialState, ...state },
   action = {}
@@ -13,6 +16,11 @@ export default function reducer(
         ...state,
         pocId: action.payload
       };
+    case UPDATE_TOTAL_PRICE:
+      return {
+        ...state,
+        price: action.payload
+      };
     default:
       return state;
   }
@@ -22,5 +30,12 @@ export function updatePocId(id) {
   return {
     type: UPDATE_POC_ID,
     payload: id
+  };
+}
+
+export function updateTotalPrice(price) {
+  return {
+    type: UPDATE_TOTAL_PRICE,
+    payload: price
   };
 }

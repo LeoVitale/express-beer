@@ -10,6 +10,5 @@ export default () => (
     <div style={{ marginTop: '70px' }}>
       <Switcher />
     </div>
-    <Footer />
   </div>
 );
