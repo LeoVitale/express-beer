@@ -12,8 +12,8 @@ class Home extends Component {
   state = {
     mapApiLoaded: false,
     querieValues: {
-      lat: -23.5505199,
-      lng: -46.63330939999997,
+      lat: -23.5554016,
+      lng: -46.6012159,
       algorithm: 'NEAREST',
       date: new Date().toISOString()
     }

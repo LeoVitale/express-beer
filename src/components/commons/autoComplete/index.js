@@ -17,8 +17,6 @@ class AutoComplete extends Component {
 
   onChange = address => this.setState({ address })
 
-  onFocus = () => console.log('focus')
-
   handleSelect = address => {
     this.setState({
       address,
@@ -48,8 +46,7 @@ class AutoComplete extends Component {
       value: this.state.address,
       autoFocus: true,
       placeholder: 'Endereço de entrega',
-      onChange: this.onChange,
-      onFocus: this.onFocus
+      onChange: this.onChange
     };
 
     return (

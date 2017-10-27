@@ -36,9 +36,14 @@ class Products extends Component {
   listOfProducts = data => {
     if (data.poc) {
       return data.poc.products.map(product => (
-        <Col xs={12} sm={4} md={3} className={styles.gutterHeight}>
+        <Col
+          key={product.id}
+          xs={12}
+          sm={4}
+          md={3}
+          className={styles.gutterHeight}
+        >
           <Product
-            key={product.id}
             productData={product.productVariants[0]}
             increasePrice={this.increasePrice}
             decreasePrice={this.decreasePrice}
@@ -91,24 +96,22 @@ const queryAllProducts = gql`
 `;
 
 const ProductsGraphQL = graphql(queryAllProducts, {
-  options: ({ pocId, search, categoryId }) => ({
-    variables: {
-      id: pocId,
-      search: '',
-      categoryId: categoryId || 0
-    }
-  })
+  options: ({ pocId, search, categoryId }) => {
+    console.log('====================================');
+    console.log(categoryId || 0, pocId || 182);
+    console.log('====================================');
+    return {
+      variables: {
+        id: pocId || '182',
+        search: search || '',
+        categoryId: categoryId || 0
+      }
+    };
+  }
 })(Products);
 
-const mapDispatchToProps = dispatch => ({
-  updateTotalPrice: price => {
-    dispatch(updateTotalPrice(price));
-  }
-});
-
 const mapStateToProps = state => ({
-  pocId: state.products.pocId,
-  price: state.products.price
+  pocId: state.products.pocId
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductsGraphQL);
+export default connect(mapStateToProps)(ProductsGraphQL);
