@@ -96,18 +96,13 @@ const queryAllProducts = gql`
 `;
 
 const ProductsGraphQL = graphql(queryAllProducts, {
-  options: ({ pocId, search, categoryId }) => {
-    console.log('====================================');
-    console.log(categoryId || 0, pocId || 182);
-    console.log('====================================');
-    return {
-      variables: {
-        id: pocId || '182',
-        search: search || '',
-        categoryId: categoryId || 0
-      }
-    };
-  }
+  options: ({ pocId, search, categoryId }) => ({
+    variables: {
+      id: pocId || '182',
+      search: search || '',
+      categoryId: categoryId || 0
+    }
+  })
 })(Products);
 
 const mapStateToProps = state => ({
