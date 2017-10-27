@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styles from './styles.scss';
 
-class Product extends Component {
+class Product extends PureComponent {
   state = {
     qtd: 0
   }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { graphql, gql, compose } from 'react-apollo';
 import { Grid, Col, Row } from 'react-flexbox-grid';
@@ -9,7 +9,7 @@ import styles from './styles.scss';
 import Product from './product';
 import Filter from './filter';
 
-class Products extends Component {
+class Products extends PureComponent {
   state = {
     price: 0
   }

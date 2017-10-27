@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styles from './styles.scss';
 
-class Filter extends Component {
+class Filter extends PureComponent {
   renderOptions = () => {
     const { categories } = this.props;
     if (categories) {

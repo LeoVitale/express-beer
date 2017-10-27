@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styles from './styles.scss';
 import PinIcon from 'images/pin-beer.svg';
 import GoogleMapReact from 'google-map-react';
@@ -16,7 +16,7 @@ const Pin = ({ text }) => (
   </div>
 );
 
-class Maps extends Component {
+class Maps extends PureComponent {
   componentWillReceiveProps(nextProps) {
     const { updatePocId, data, pocId } = this.props;
     if (nextProps.data.pocSearch !== undefined) {

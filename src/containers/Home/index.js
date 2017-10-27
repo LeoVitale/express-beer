@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import { connect } from 'react-redux';
 import styles from './styles.scss';
@@ -8,7 +8,7 @@ import Slider from 'components/commons/slider';
 import Maps from 'components/commons/maps';
 import AutoComplete from 'components/commons/autoComplete';
 
-class Home extends Component {
+class Home extends PureComponent {
   state = {
     mapApiLoaded: false,
     querieValues: {

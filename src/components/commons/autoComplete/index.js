@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Link from 'redux-first-router-link';
 import styles from './styles.scss';
 import PlacesAutocomplete, {
@@ -6,7 +6,7 @@ import PlacesAutocomplete, {
   getLatLng
 } from 'react-places-autocomplete';
 
-class AutoComplete extends Component {
+class AutoComplete extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
