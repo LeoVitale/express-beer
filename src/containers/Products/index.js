@@ -6,8 +6,18 @@ import { Grid, Col, Row } from 'react-flexbox-grid';
 import styles from './styles.scss';
 
 import Product from './product';
+import Filter from './filter';
 
 class Products extends Component {
+  filterByCategory = id => {
+    const { data, pocId } = this.props;
+    data.refetch({
+      id: pocId,
+      search: '',
+      categoryId: id
+    });
+  }
+
   listOfProducts = data => {
     if (data.poc) {
       return data.poc.products.map(product => (
@@ -24,6 +34,10 @@ class Products extends Component {
     return (
       <div className={styles.products}>
         <Grid className={styles.productsList}>
+          <Filter
+            categories={data.categories}
+            filterByCategory={this.filterByCategory}
+          />
           <Row>{this.listOfProducts(data)}</Row>
         </Grid>
       </div>
@@ -55,7 +69,7 @@ const ProductsGraphQL = graphql(queryAllProducts, {
     variables: {
       id: pocId,
       search: '',
-      categoryId: 0
+      categoryId: categoryId || 0
     }
   })
 })(Products);
