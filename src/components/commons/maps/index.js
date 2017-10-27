@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styles from './styles.scss';
 import PinIcon from 'images/pin-beer.svg';
 import GoogleMapReact from 'google-map-react';
+import { graphql, gql } from 'react-apollo';
 import {
   withScriptjs,
   withGoogleMap,
@@ -16,12 +17,18 @@ const Pin = ({ text }) => (
 );
 
 class Maps extends Component {
-  state = {
-    mapLoaded: false
-  }
-
-  static defaultProps = {
-    zoom: 18
+  componentWillReceiveProps(nextProps) {
+    const { updatePocId, data, pocId } = this.props;
+    if (nextProps.data.pocSearch !== undefined) {
+      if (
+        nextProps.data.pocSearch.length > 0 &&
+        nextProps.data.pocSearch[0].id !== pocId
+      ) {
+        updatePocId(nextProps.data.pocSearch[0].id);
+      } else {
+        updatePocId('0');
+      }
+    }
   }
 
   onGoogleApiLoaded = () => {
@@ -48,8 +55,10 @@ class Maps extends Component {
   })
 
   render() {
-    const { mapLoaded } = this.state;
-    const { lat, lng } = this.props.coord;
+    const {
+      lat, lng, algorithm, date
+    } = this.props.querieValues;
+
     return (
       <div className={styles.maps}>
         <GoogleMapReact
@@ -61,7 +70,7 @@ class Maps extends Component {
           onGoogleApiLoaded={this.onGoogleApiLoaded}
           defaultCenter={{ lat, lng }}
           center={{ lat, lng }}
-          zoom={this.props.zoom}
+          zoom={18}
           options={this.createMapOptions}
         >
           <Pin lat={lat} lng={lng} />
@@ -71,4 +80,34 @@ class Maps extends Component {
   }
 }
 
-export default Maps;
+const query = gql`
+  query pocSearchMethod(
+    $now: DateTime!
+    $algorithm: String!
+    $lat: String!
+    $long: String!
+  ) {
+    pocSearch(now: $now, algorithm: $algorithm, lat: $lat, long: $long) {
+      id
+      tradingName
+    }
+  }
+`;
+
+const MapsGraphQL = graphql(query, {
+  options: props => {
+    const {
+      date, algorithm, lat, lng
+    } = props.querieValues;
+    return {
+      variables: {
+        now: date,
+        algorithm,
+        lat,
+        long: lng
+      }
+    };
+  }
+})(Maps);
+
+export default MapsGraphQL;

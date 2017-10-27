@@ -24,12 +24,12 @@ class AutoComplete extends Component {
       address,
       loading: true
     });
-    const { setLatLng } = this.props;
+    const { fetchQuerie } = this.props;
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
       .then(({ lat, lng }) => {
         console.log('Success Yay', { lat, lng });
-        setLatLng({ lat, lng });
+        fetchQuerie({ lat, lng });
         this.setState({
           loading: false
         });
@@ -69,6 +69,7 @@ class AutoComplete extends Component {
           className={styles.continueButton}
           href="/products"
           to="/products"
+          disabled={this.props.disableButtom}
         >
           Continuar
         </Link>

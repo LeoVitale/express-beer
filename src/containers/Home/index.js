@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { graphql, gql } from 'react-apollo';
-import styles from './styles.scss';
 
+import { connect } from 'react-redux';
+import styles from './styles.scss';
+import { setQuerieValue } from 'reducers/home';
+import { updatePocId } from 'reducers/products';
 import Slider from 'components/commons/slider';
 import Maps from 'components/commons/maps';
 import AutoComplete from 'components/commons/autoComplete';
@@ -9,30 +11,55 @@ import AutoComplete from 'components/commons/autoComplete';
 class Home extends Component {
   state = {
     mapApiLoaded: false,
-    coord: { lat: -23.551449, lng: -46.6565569 }
+    querieValues: {
+      lat: -23.5505199,
+      lng: -46.63330939999997,
+      algorithm: 'NEAREST',
+      date: new Date().toISOString()
+    }
   }
 
   apiLoadedHandler = () => {
     this.setState({ mapApiLoaded: true });
   }
 
-  setLatLng = ({ lat, lng }) => this.setState({ coord: { lat, lng } })
+  fetchQuerie = ({ lat, lng }) => {
+    const { dispatch, data } = this.props;
+    const date = new Date().toISOString();
+    this.setState({
+      querieValues: {
+        lat,
+        lng,
+        date,
+        algorithm: 'NEAREST'
+      }
+    });
+  }
 
   render() {
-    const { mapApiLoaded, coord } = this.state;
+    const { mapApiLoaded, querieValues } = this.state;
+    const { updatePocId, pocId } = this.props;
+
     return (
       <div className={styles.home}>
         <div className={styles.bannerMaps}>
           <Maps
             mapApiLoaded={mapApiLoaded}
             apiLoadedHandler={this.apiLoadedHandler}
-            coord={coord}
+            querieValues={querieValues}
+            updatePocId={updatePocId}
+            pocId={pocId}
           />
           <div className={styles.sliderContainer}>
             <Slider />
           </div>
           <div className={styles.autoCompleteContainer}>
-            {mapApiLoaded && <AutoComplete setLatLng={this.setLatLng} />}
+            {mapApiLoaded && (
+              <AutoComplete
+                fetchQuerie={this.fetchQuerie}
+                disableButtom={pocId === '0'}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -40,13 +67,18 @@ class Home extends Component {
   }
 }
 
-const query = gql`
-  {
-    allCategory {
-      title
-      id
-    }
-  }
-`;
+const mapStateToProps = state => ({
+  home: state.home,
+  pocId: state.products.pocId
+});
 
-export default graphql(query)(Home);
+const mapDispatchToProps = dispatch => ({
+  setQuerieValue: querie => {
+    dispatch(setQuerieValue(querie));
+  },
+  updatePocId: id => {
+    dispatch(updatePocId(id));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

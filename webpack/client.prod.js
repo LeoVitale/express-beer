@@ -71,6 +71,7 @@ module.exports = {
   },
   resolve: {
     alias: {
+      reducers: path.resolve(__dirname, '../src/reducers/'),
       components: path.resolve(__dirname, '../src/components/'),
       containers: path.resolve(__dirname, '../src/containers/'),
       images: path.resolve(__dirname, '../src/img/')
