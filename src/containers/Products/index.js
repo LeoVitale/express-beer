@@ -57,6 +57,8 @@ class Products extends PureComponent {
   render() {
     const { data, price } = this.props;
 
+    data.loading && <div>Loading</div>;
+
     return (
       <div className={styles.products}>
         <Grid className={styles.productsList}>
@@ -98,7 +100,7 @@ const queryAllProducts = gql`
 const ProductsGraphQL = graphql(queryAllProducts, {
   options: ({ pocId, search, categoryId }) => ({
     variables: {
-      id: pocId || '182',
+      id: pocId || '192',
       search: search || '',
       categoryId: categoryId || 0
     }
