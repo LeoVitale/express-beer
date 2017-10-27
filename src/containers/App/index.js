@@ -6,6 +6,8 @@ import Hedader from 'components/layout/header';
 export default () => (
   <div className={styles.app}>
     <Hedader />
-    <Switcher />
+    <div style={{ marginTop: '70px' }}>
+      <Switcher />
+    </div>
   </div>
 );

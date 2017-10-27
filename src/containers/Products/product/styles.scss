@@ -1,0 +1,48 @@
+
+.product {
+  width: 100%;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+  overflow: hidden;
+  margin: auto;
+  @include screen-desktop {
+    width: 250px;
+    height: 100%;
+  }
+  .image-container {
+    display: inline-block;
+    vertical-align: middle;
+    height: 103px;
+    @include screen-desktop {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .product-image {
+      width: 100px;
+      height: 100%;
+      @include screen-desktop {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+  .text-container {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 10px;
+    width: calc(100% - 120px);
+    @include screen-desktop {
+      width: 100%;
+      display: block;
+      vertical-align: middle;
+    }
+    .title {
+      display: block;
+      font-size: .8rem;
+    }
+    .price {
+      display: block;
+      font-weight: bold;
+    }
+  }
+}

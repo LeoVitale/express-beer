@@ -6,9 +6,13 @@ class Product extends Component {
     const { title, imageUrl, price } = this.props.productData;
     return (
       <div className={styles.product}>
-        <img src={imageUrl} alt={title} />
-        <span>{title}</span>
-        <span>R$ {price}</span>
+        <div className={styles.imageContainer}>
+          <img className={styles.productImage} src={imageUrl} alt={title} />
+        </div>
+        <div className={styles.textContainer}>
+          <span className={styles.title}>{title}</span>
+          <span className={styles.price}>R$ {price}</span>
+        </div>
       </div>
     );
   }

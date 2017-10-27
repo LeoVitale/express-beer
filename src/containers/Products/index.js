@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { graphql, gql, compose } from 'react-apollo';
+import { Grid, Col, Row } from 'react-flexbox-grid';
 
 import styles from './styles.scss';
 
@@ -8,20 +9,25 @@ import Product from './product';
 
 class Products extends Component {
   listOfProducts = data => {
-    console.log('====================================');
-    console.log(data);
-    console.log('====================================');
     if (data.poc) {
       return data.poc.products.map(product => (
-        <Product productData={product.productVariants[0]} />
+        <Col xs={12} sm={4} md={3} className={styles.gutterHeight}>
+          <Product key={product.id} productData={product.productVariants[0]} />
+        </Col>
       ));
     }
-    return <div>ddd</div>;
+    return <div>loading</div>;
   }
 
   render() {
     const { data } = this.props;
-    return <div>{this.listOfProducts(data)}</div>;
+    return (
+      <div className={styles.products}>
+        <Grid className={styles.productsList}>
+          <Row>{this.listOfProducts(data)}</Row>
+        </Grid>
+      </div>
+    );
   }
 }
 
@@ -29,9 +35,9 @@ const queryAllProducts = gql`
   query pocCategorySearch($id: ID!, $search: String!, $categoryId: Int!) {
     poc(id: $id) {
       products(categoryId: $categoryId, search: $search) {
+        id
         productVariants {
           title
-          description
           imageUrl
           price
         }

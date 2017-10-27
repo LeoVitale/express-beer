@@ -1,5 +1,12 @@
 @import url('./resources/normalize.scss');
 
+:global {
+  @import url('./resources/flexbox-grid.scss');
+}
+
+* {
+  box-sizing: border-box;
+}
 body {
   font-family: 'Open Sans', sans-serif;
 }
