@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import styles from './styles.scss';
 
 class Product extends PureComponent {
@@ -38,5 +39,11 @@ class Product extends PureComponent {
     );
   }
 }
+
+Product.propTypes = {
+  productData: PropTypes.object,
+  increasePrice: PropTypes.func.isRequired,
+  decreasePrice: PropTypes.func.isRequired
+};
 
 export default Product;

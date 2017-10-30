@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import universal from 'react-universal-component';
 
@@ -17,6 +18,10 @@ const Switcher = ({ page }) => (
     <UniversalComponent page={page} />
   </div>
 );
+
+Switcher.propTypes = {
+  page: PropTypes.string
+};
 
 const mapState = ({ page }) => ({ page });
 

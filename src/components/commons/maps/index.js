@@ -88,7 +88,6 @@ Maps.propTypes = {
   apiLoadedHandler: PropTypes.func.isRequired,
   mapApiLoaded: PropTypes.bool.isRequired,
   querieValues: PropTypes.object.isRequired
-
 };
 
 const query = gql`

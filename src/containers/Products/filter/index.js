@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import styles from './styles.scss';
 
 class Filter extends PureComponent {
@@ -29,5 +30,10 @@ class Filter extends PureComponent {
     );
   }
 }
+
+Filter.propTypes = {
+  categories: PropTypes.array,
+  filterByCategory: PropTypes.func.isRequired
+};
 
 export default Filter;

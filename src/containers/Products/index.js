@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { graphql, gql, compose } from 'react-apollo';
 import { Grid, Col, Row } from 'react-flexbox-grid';
-import { updateTotalPrice } from 'reducers/products';
 
 import styles from './styles.scss';
 
@@ -15,12 +15,12 @@ class Products extends PureComponent {
   }
 
   increasePrice = value => {
-    const { updateTotalPrice, price } = this.props;
+    const { price } = this.props;
     this.setState({ price: this.state.price + value });
   }
 
   decreasePrice = value => {
-    const { updateTotalPrice, price } = this.props;
+    const { price } = this.props;
     this.setState({ price: this.state.price - value });
   }
 
@@ -57,7 +57,9 @@ class Products extends PureComponent {
   render() {
     const { data, price } = this.props;
 
-    data.loading && <div>Loading</div>;
+    if (data.loading) {
+      return <div>Loading</div>;
+    }
 
     return (
       <div className={styles.products}>
@@ -77,6 +79,12 @@ class Products extends PureComponent {
     );
   }
 }
+
+Products.propTypes = {
+  price: PropTypes.string,
+  data: PropTypes.object,
+  pocId: PropTypes.string
+};
 
 const queryAllProducts = gql`
   query pocCategorySearch($id: ID!, $search: String!, $categoryId: Int!) {

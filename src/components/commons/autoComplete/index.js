@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import Link from 'redux-first-router-link';
 import styles from './styles.scss';
 import PlacesAutocomplete, {
@@ -74,5 +75,9 @@ class AutoComplete extends PureComponent {
     );
   }
 }
+AutoComplete.propTypes = {
+  fetchQuerie: PropTypes.func.isRequired,
+  disableButtom: PropTypes.bool.isRequired
+};
 
 export default AutoComplete;

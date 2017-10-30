@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styles from './styles.scss';
 import { setQuerieValue } from 'reducers/home';
@@ -69,6 +69,13 @@ class Home extends PureComponent {
     );
   }
 }
+
+Home.propTypes = {
+  dispatch: PropTypes.func,
+  data: PropTypes.object,
+  updatePocId: PropTypes.func,
+  pocId: PropTypes.string
+};
 
 const mapStateToProps = state => ({
   home: state.home,
