@@ -2,7 +2,7 @@ const UPDATE_POC_ID = 'expressbeer/products/UPDATE_POC_ID';
 const UPDATE_TOTAL_PRICE = 'expressbeer/products/UPDATE_TOTAL_PRICE';
 
 const initialState = {
-  pocId: '192',
+  pocId: '194',
   price: 0
 };
 

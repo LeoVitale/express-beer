@@ -100,7 +100,7 @@ const queryAllProducts = gql`
 const ProductsGraphQL = graphql(queryAllProducts, {
   options: ({ pocId, search, categoryId }) => ({
     variables: {
-      id: pocId || '192',
+      id: pocId || '194',
       search: search || '',
       categoryId: categoryId || 0
     }
