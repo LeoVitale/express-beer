@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import styles from './styles.scss';
 import PinIcon from 'images/pin-beer.svg';
 import GoogleMapReact from 'google-map-react';
@@ -10,7 +11,7 @@ import {
   Marker
 } from 'react-google-maps';
 
-const Pin = ({ text }) => (
+const Pin = () => (
   <div className={styles.pin}>
     <img src={PinIcon} alt="Pin" />
   </div>
@@ -79,6 +80,16 @@ class Maps extends PureComponent {
     );
   }
 }
+
+Maps.propTypes = {
+  updatePocId: PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired,
+  pocId: PropTypes.string.isRequired,
+  apiLoadedHandler: PropTypes.func.isRequired,
+  mapApiLoaded: PropTypes.bool.isRequired,
+  querieValues: PropTypes.object.isRequired
+
+};
 
 const query = gql`
   query pocSearchMethod(
