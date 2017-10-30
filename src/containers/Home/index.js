@@ -11,6 +11,7 @@ import AutoComplete from 'components/commons/autoComplete';
 class Home extends PureComponent {
   state = {
     mapApiLoaded: false,
+    adressFounded: false,
     querieValues: {
       lat: -23.5554016,
       lng: -46.6012159,
@@ -27,6 +28,7 @@ class Home extends PureComponent {
     const { dispatch, data } = this.props;
     const date = new Date().toISOString();
     this.setState({
+      adressFounded: true,
       querieValues: {
         lat,
         lng,
@@ -37,8 +39,9 @@ class Home extends PureComponent {
   }
 
   render() {
-    const { mapApiLoaded, querieValues } = this.state;
+    const { mapApiLoaded, querieValues, adressFounded } = this.state;
     const { updatePocId, pocId } = this.props;
+    const showMap = adressFounded ? styles.showMap : '';
 
     return (
       <div className={styles.home}>
@@ -50,7 +53,7 @@ class Home extends PureComponent {
             updatePocId={updatePocId}
             pocId={pocId}
           />
-          <div className={styles.sliderContainer}>
+          <div className={`${styles.sliderContainer} ${showMap}`}>
             <Slider />
           </div>
           <div className={styles.autoCompleteContainer}>

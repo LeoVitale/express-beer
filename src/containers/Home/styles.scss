@@ -1,15 +1,16 @@
 .home {
   .banner-maps {
     position: relative;
-    height: 90vh;
+    height: 100vh;
   }
   .slider-container {
-    opacity: 0;
+
     position: absolute;
     top: 0;
     z-index: 10;
     height: 100%;
     width: 100%;
+    transition: opacity .5s cubic-bezier(0.075, 0.82, 0.165, 1);
     &::after {
       content: '';
       width: 100%;
@@ -21,9 +22,17 @@
   }
   .auto-complete-container  {
     z-index: 11;
-    width: 50%;
+    width: 90%;
     top: 50%;
     position: absolute;
-    transform: translate(50%, 100%);
+    transform: translate(5%, 100%);
+    @include screen-desktop {
+      width: 50%;
+      transform: translate(50%, 100%);
+    }
+  }
+  .show-map {
+    opacity: 0;
+    pointer-events: none;
   }
 }

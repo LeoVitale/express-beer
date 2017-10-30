@@ -7,7 +7,7 @@ import Footer from 'components/layout/footer';
 export default () => (
   <div className={styles.app}>
     <Hedader />
-    <div style={{ marginTop: '70px' }}>
+    <div className={styles.app}>
       <Switcher />
     </div>
   </div>
