@@ -59,3 +59,4 @@ typings/
 
 buildClient
 buildServer
+.DS_Store
